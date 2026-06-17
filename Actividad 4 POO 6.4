@@ -1,0 +1,115 @@
+import tkinter as tk
+
+
+
+
+class PruebaExcepciones:
+
+    def ejecutar_primer_try(self):
+
+        resultado = ""
+
+        try:
+            resultado += "Ingresando al primer try\n"
+
+            cociente = 1000000 / 0
+
+            resultado += "Después de la división\n"
+
+        except ZeroDivisionError:
+            resultado += "División por cero\n"
+
+        finally:
+            resultado += "Ingresando al primer finally\n"
+
+        return resultado
+
+    def ejecutar_segundo_try(self):
+
+        resultado = ""
+
+        try:
+            resultado += "Ingresando al segundo try\n"
+
+            objeto = None
+            objeto.upper()
+
+            resultado += "Imprimiendo objeto\n"
+
+        except ZeroDivisionError:
+            resultado += "División por cero\n"
+
+        except Exception:
+            resultado += "Ocurrió una excepción\n"
+
+        finally:
+            resultado += "Ingresando al segundo finally\n"
+
+        return resultado
+
+
+
+
+def ejecutar_programa():
+
+    prueba = PruebaExcepciones()
+
+    salida = ""
+
+    salida += prueba.ejecutar_primer_try()
+    salida += prueba.ejecutar_segundo_try()
+
+    cuadro_texto.delete("1.0", tk.END)
+    cuadro_texto.insert(tk.END, salida)
+
+
+def limpiar():
+
+    cuadro_texto.delete("1.0", tk.END)
+
+
+
+ventana = tk.Tk()
+ventana.title("Prueba de Excepciones")
+ventana.geometry("500x350")
+ventana.resizable(False, False)
+
+titulo = tk.Label(
+    ventana,
+    text="Manejo de Excepciones",
+    font=("Arial", 14, "bold")
+)
+
+titulo.pack(pady=10)
+
+btn_ejecutar = tk.Button(
+    ventana,
+    text="Ejecutar programa",
+    width=20,
+    command=ejecutar_programa
+)
+
+btn_ejecutar.pack(pady=5)
+
+btn_limpiar = tk.Button(
+    ventana,
+    text="Limpiar",
+    width=20,
+    command=limpiar
+)
+
+btn_limpiar.pack(pady=5)
+
+cuadro_texto = tk.Text(
+    ventana,
+    width=50,
+    height=10,
+    font=("Courier New", 12)
+)
+
+cuadro_texto.pack(pady=15)
+
+
+
+
+ventana.mainloop()
